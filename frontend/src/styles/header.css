@@ -1,0 +1,109 @@
+/* Top header */
+.top-header {
+  height: auto;
+  min-height: 140px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e9ecef;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 16px 24px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  z-index: 10;
+}
+
+.header-left, .header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 6px;
+  color: #495057;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.icon-btn:hover {
+  background-color: #f1f3f5;
+}
+
+.page-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #343a40;
+}
+
+.status-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-weight: 500;
+}
+.status-badge.loading { background-color: #e7f5ff; color: #1c7ed6; }
+.status-badge.success { background-color: #e6fcf5; color: #0ca678; }
+.status-badge.error { background-color: #fff5f5; color: #fa5252; }
+
+.hidden-input {
+  display: none;
+}
+
+.primary-btn {
+  background-color: #4c6ef5;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s;
+  box-shadow: 0 2px 4px rgba(76, 110, 245, 0.3);
+}
+
+.primary-btn:hover {
+  background-color: #3b5bdb;
+  box-shadow: 0 4px 8px rgba(76, 110, 245, 0.4);
+}
+
+.primary-btn:disabled {
+  cursor: not-allowed;
+}
+
+/* Colour variants of the primary button */
+.primary-btn.green { background-color: #27ae60; }
+.primary-btn.green:hover { background-color: #229954; box-shadow: 0 4px 8px rgba(39, 174, 96, 0.4); }
+.primary-btn.orange { background-color: #e67e22; }
+.primary-btn.orange:hover { background-color: #d35400; box-shadow: 0 4px 8px rgba(230, 126, 34, 0.4); }
+.primary-btn.purple { background-color: #8e44ad; }
+.primary-btn.purple:hover { background-color: #7a3a8f; box-shadow: 0 4px 8px rgba(142, 68, 173, 0.4); }
+.primary-btn.blue { background-color: #1971c2; }
+.primary-btn.red { background-color: #e74c3c; }
+.primary-btn.grey { background-color: #6c757d; }
+.primary-btn:disabled,
+.primary-btn:disabled:hover { background-color: #adb5bd; box-shadow: none; }
+
+.primary-btn:active {
+  transform: translateY(1px);
+  box-shadow: none;
+}
+
+.buttons-container {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+}

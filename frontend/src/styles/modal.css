@@ -1,0 +1,144 @@
+/* Shared modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: white;
+  border-radius: 8px;
+  padding: 24px;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 16px;
+  color: #333;
+}
+
+.modal-body {
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.form-group select,
+.form-group input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #4c6ef5;
+  box-shadow: 0 0 0 3px rgba(76, 110, 245, 0.1);
+}
+
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.modal-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.modal-btn-primary {
+  background-color: #8e44ad;
+  color: white;
+}
+
+.modal-btn-primary:hover {
+  background-color: #7a3a8f;
+}
+
+.modal-btn-secondary {
+  background-color: #e9ecef;
+  color: #333;
+}
+
+.modal-btn-secondary:hover {
+  background-color: #dee2e6;
+}
+
+/* Cross analyses modal */
+.modal-content.analysis-modal {
+  max-width: 760px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+.analysis-intro {
+  margin: -6px 0 16px;
+  color: #666;
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+.analysis-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+}
+.analysis-card {
+  text-align: left;
+  background: #fff;
+  border: 1px solid #e3e6ea;
+  border-radius: 10px;
+  padding: 14px;
+  cursor: pointer;
+  transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font: inherit;
+  color: #333;
+}
+.analysis-card:hover:not(:disabled) {
+  border-color: #4c6ef5;
+  box-shadow: 0 4px 14px rgba(76, 110, 245, 0.15);
+  transform: translateY(-1px);
+}
+.analysis-card:disabled { opacity: 0.6; cursor: wait; }
+.analysis-card-title { font-weight: 600; font-size: 0.95rem; }
+.analysis-card-desc { font-size: 0.8rem; color: #666; line-height: 1.4; }
+.analysis-tags { display: flex; gap: 4px; margin-top: auto; }
+.analysis-tag {
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: #edf2ff;
+  color: #3b5bdb;
+}

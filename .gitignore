@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+.env
+
+# Node / Vite
+node_modules/
+dist/
+*.local
+
+# Generated reports
+backend/analyses_html/
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store

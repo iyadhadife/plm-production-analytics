@@ -6,13 +6,21 @@ Dashboard for an aircraft assembly line. It joins three Excel extracts:
 - **PLM** (`PLM_DataSet.xlsx`): the parts, their cost, supplier, lead time and criticality;
 - **ERP** (`ERP_Equipes_Airplus.xlsx`): the operators, their station, hourly cost, experience and weekly rotation.
 
-It shows station and step reports, six cross analyses, and a chatbot (Gemini) that answers questions about the files.
+It shows station and step reports, nine cross analyses, and a chatbot (Gemini) that answers questions about the files.
 
 Built with a **Flask + pandas + Plotly** backend and a **React + Vite** frontend.
 
 ![Dashboard demo: file preview, costs by step, cross analyses and Sankey workflow](docs/demo.gif)
 
 ## Quick start
+
+### Docker (recommended)
+
+```bash
+GEMINI_API_KEY=your_key docker compose up -d --build   # http://localhost:5000
+```
+
+One image builds the frontend and serves it with the API (gunicorn). Uploaded files are kept in the `uploads` volume.
 
 ### 1. Backend (Python 3.10+)
 
@@ -50,9 +58,9 @@ cd frontend && npm run lint && npm run build
 | Team experience by week | `GET /api/reports/team-experience` | Headcount per week, step and station by experience level (green when ≥ 1/3 experts) |
 | Costs by step | `GET /api/reports/step-costs` | Parts + labour cost per step, with a pie chart |
 | Sankey workflow | `GET /api/reports/workflow?step=&max_nodes=` | Step → station → part flows |
-| ⚠️ Delays > 10 min | `GET /api/reports/delays` | Stations with an average delay above 10 minutes, with incident and cause |
-| Quick access → Step details | `GET /api/reports/step-details?step=` | Parts, people, costs and times of one step |
-| 🔗 Cross analyses | `GET /api/analyses/<name>` | 6 MES × PLM × ERP analyses, see [docs/cross-analyses.md](docs/cross-analyses.md) |
+| Delays > 10 min | `GET /api/reports/delays` | Stations with an average delay above 10 minutes, with incident and cause |
+| Step details | `GET /api/reports/step-details?step=` | Parts, people, costs and times of one step |
+| Cross analyses | `GET /api/analyses/<name>` | 9 MES × PLM × ERP analyses (incl. schedule reliability, cost structure, workforce & succession), see [docs/cross-analyses.md](docs/cross-analyses.md) |
 | Click on an `.xlsx` file | `GET /api/files/<name>/table` | Table preview of the file |
 | Chat bubble | `POST /api/chat` | Questions in natural language about the Excel files |
 
@@ -92,11 +100,11 @@ frontend/src/
 ├── main.jsx, App.jsx
 ├── api/                         # backend calls (client, files, reports, chat)
 ├── hooks/                       # dashboard state (files, report, status, steps)
-├── constants/analyses.js        # catalogue of the cross analyses
+├── constants/analyses.js        # catalogue of the cross analyses and reports
 ├── components/
-│   ├── layout/                  # sidebars, header, toolbar, upload button
-│   ├── preview/                 # report iframe, file preview, fullscreen
-│   ├── modals/                  # analyses and Sankey settings dialogs
+│   ├── layout/                  # navigation sidebar, header, step panel, upload
+│   ├── preview/                 # home page, report iframe, file preview, fullscreen
+│   ├── modals/                  # Sankey settings dialog
 │   └── chatbot/                 # chat widget
 └── styles/                      # one CSS file per area
 ```

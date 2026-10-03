@@ -19,7 +19,20 @@ def build_staff(erp: pd.DataFrame) -> pd.DataFrame:
         "level": erp[col.ERP_EXPERIENCE].map(EXPERIENCE_LABELS).fillna(erp[col.ERP_EXPERIENCE]),
     })
     staff["exp_score"] = staff["level"].map(EXPERIENCE_SCORE)
+    # Optional ERP columns used by the workforce analysis.
+    for name, column in (("qualification", col.ERP_QUALIFICATION), ("certifications", col.ERP_CERTIFICATIONS),
+                         ("rotation", col.ERP_ROTATION)):
+        staff[name] = erp[column] if column in erp.columns else None
     return staff
+
+
+def rotations(staff: pd.DataFrame) -> pd.DataFrame:
+    """One row per (operator, week, station) parsed from "Semaine 1: Poste 55 | Semaine 3: Poste 50"."""
+    long = staff[["id", "level", "rotation"]].dropna(subset=["rotation"]).copy()
+    found = long["rotation"].astype(str).str.extractall(r"Semaine\s*(\d+)\s*:\s*Poste\s*(\d+)")
+    found.columns = ["week", "station"]
+    found = found.astype(int).reset_index(level=1, drop=True)
+    return long[["id", "level"]].join(found, how="inner").reset_index(drop=True)
 
 
 def team_by_station(staff: pd.DataFrame) -> pd.DataFrame:

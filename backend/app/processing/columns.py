@@ -31,6 +31,8 @@ ERP_ID = "Matricule"
 ERP_FIRST_NAME = "Prénom"
 ERP_LAST_NAME = "Nom"
 ERP_AGE = "Âge"
+ERP_QUALIFICATION = "Qualification"
+ERP_CERTIFICATIONS = "Habilitations"    # "Électrique, Pneumatique"
 ERP_HOME_STATION = "Poste de montage"   # "Poste N" = home team of station N
 ERP_HOURLY_COST = "Coût horaire (€)"
 ERP_EXPERIENCE = "Niveau d'expérience"

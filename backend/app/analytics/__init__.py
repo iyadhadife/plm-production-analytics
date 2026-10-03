@@ -7,7 +7,9 @@ frontend iframe. See docs/cross-analyses.md for the method.
 
 from pathlib import Path
 
-from app.analytics.analyses import experience, overview, pareto, priority_matrix, supply_risk, timeline
+from app.analytics.analyses import (
+    cost_structure, experience, overview, pareto, priority_matrix, schedule, supply_risk, timeline, workforce,
+)
 from app.analytics.model import build_model
 from app.processing.loader import load_sources
 
@@ -18,6 +20,9 @@ ANALYSES = {
     "experience": experience.render,
     "supply-risk": supply_risk.render,
     "timeline": timeline.render,
+    "cost-structure": cost_structure.render,
+    "workforce": workforce.render,
+    "schedule": schedule.render,
 }
 
 

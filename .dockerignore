@@ -1,0 +1,12 @@
+.git
+**/node_modules
+**/dist
+**/.venv
+**/venv
+**/__pycache__
+**/.pytest_cache
+**/.env
+**/*.local
+backend/analyses_html
+.vscode
+.idea

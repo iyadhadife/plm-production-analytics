@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import Chatbot from './components/chatbot/Chatbot.jsx';
-import FileSidebar from './components/layout/FileSidebar.jsx';
 import Header from './components/layout/Header.jsx';
+import NavSidebar from './components/layout/NavSidebar.jsx';
 import QuickAccessPanel from './components/layout/QuickAccessPanel.jsx';
-import AnalysesModal from './components/modals/AnalysesModal.jsx';
 import WorkflowModal from './components/modals/WorkflowModal.jsx';
 import FullscreenReport from './components/preview/FullscreenReport.jsx';
 import PreviewArea from './components/preview/PreviewArea.jsx';
@@ -11,22 +10,18 @@ import useDashboard from './hooks/useDashboard.js';
 import useSteps from './hooks/useSteps.js';
 
 export default function App() {
-  const { status, files, selectedFile, selectFile, upload, report, reports } = useDashboard();
+  const { status, files, selectedFile, selectFile, upload, report, reports, view, goHome } = useDashboard();
   const steps = useSteps();
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isQuickAccessOpen, setIsQuickAccessOpen] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const [modal, setModal] = useState(null); // 'workflow' | 'analyses' | null
+  const [isWorkflowOpen, setIsWorkflowOpen] = useState(false);
 
-  const closeModal = () => setModal(null);
-
-  const headerActions = {
-    teamExperience: reports.teamExperience,
-    stepCosts: reports.stepCosts,
-    delays: reports.delays,
-    openWorkflow: () => setModal('workflow'),
-    openAnalyses: () => setModal('analyses'),
+  const actions = {
+    ...reports,
+    goHome,
+    openWorkflow: () => setIsWorkflowOpen(true),
     toggleQuickAccess: () => setIsQuickAccessOpen(!isQuickAccessOpen),
   };
 
@@ -38,23 +33,31 @@ export default function App() {
         <FullscreenReport html={report.html} onExit={() => setIsFullscreen(false)} />
       ) : (
         <>
-          <FileSidebar isOpen={isSidebarOpen} files={files} selectedFile={selectedFile} onSelect={selectFile} />
+          <NavSidebar
+            isOpen={isSidebarOpen}
+            view={view}
+            loading={report.loading}
+            files={files}
+            selectedFile={selectedFile}
+            actions={actions}
+            onSelectFile={selectFile}
+          />
 
           <div className="main-content">
             <Header
-              title={selectedFile ? selectedFile.name : 'Dashboard'}
+              view={view}
               status={status}
-              loading={report.loading}
-              actions={headerActions}
-              isQuickAccessOpen={isQuickAccessOpen}
+              hasReport={Boolean(report.html)}
               onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
               onUpload={upload}
+              onFullscreen={() => setIsFullscreen(true)}
+              onClose={goHome}
             />
             <PreviewArea
               selectedFile={selectedFile}
               reportHtml={report.html}
-              onFullscreen={() => setIsFullscreen(true)}
-              onCloseReport={report.clear}
+              loading={report.loading}
+              actions={actions}
             />
           </div>
 
@@ -68,23 +71,13 @@ export default function App() {
         </>
       )}
 
-      {modal === 'analyses' && (
-        <AnalysesModal
-          loading={report.loading}
-          onClose={closeModal}
-          onSelect={(analysis) => {
-            closeModal();
-            reports.analysis(analysis);
-          }}
-        />
-      )}
-      {modal === 'workflow' && (
+      {isWorkflowOpen && (
         <WorkflowModal
           steps={steps}
           loading={report.loading}
-          onClose={closeModal}
+          onClose={() => setIsWorkflowOpen(false)}
           onSubmit={(step, maxNodes) => {
-            closeModal();
+            setIsWorkflowOpen(false);
             reports.workflow(step || null, maxNodes);
           }}
         />

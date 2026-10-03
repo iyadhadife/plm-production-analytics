@@ -1,41 +1,23 @@
-import EmptyState from './EmptyState.jsx';
 import FilePreview from './FilePreview.jsx';
+import HomeView from './HomeView.jsx';
 import ReportFrame from './ReportFrame.jsx';
-import ResultBanner from './ResultBanner.jsx';
 
-/** Central area: the current report, else the selected file, else an empty state. */
-export default function PreviewArea({ selectedFile, reportHtml, onFullscreen, onCloseReport }) {
+/** Central area: the current report, else the selected file, else the home page. */
+export default function PreviewArea({ selectedFile, reportHtml, loading, actions }) {
   if (!selectedFile && !reportHtml) {
     return (
-      <main className="preview-area">
-        <EmptyState />
+      <main className="preview-area scroll">
+        <HomeView loading={loading} actions={actions} />
+        {loading && <div className="loading-bar" />}
       </main>
     );
   }
 
   return (
     <main className="preview-area">
-      <div className="preview-card">
-        {reportHtml && <ResultBanner onFullscreen={onFullscreen} onClose={onCloseReport} />}
-
-        <div className="preview-card-header">
-          {selectedFile ? (
-            <>
-              <span>ID: {selectedFile.id}</span>
-              <span className="file-type-badge">{selectedFile.type}</span>
-            </>
-          ) : null}
-        </div>
-
-        <div className="preview-card-body">
-          {reportHtml ? (
-            <div className="report-frame-wrap">
-              <ReportFrame html={reportHtml} />
-            </div>
-          ) : (
-            <FilePreview file={selectedFile} />
-          )}
-        </div>
+      {loading && <div className="loading-bar" />}
+      <div className="report-surface">
+        {reportHtml ? <ReportFrame html={reportHtml} /> : <FilePreview file={selectedFile} />}
       </div>
     </main>
   );

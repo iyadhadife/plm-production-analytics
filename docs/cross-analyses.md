@@ -34,6 +34,9 @@ Indicators computed for each MES operation (`backend/app/analytics/model/`):
 | 4 | `experience` | Does team experience matter? | Scatter plot + **linear regression and Pearson r**, boxes by team composition, hourly cost by level |
 | 5 | `supply-risk` | Which parts can stop the line? | **Parts risk matrix** lead time × cost × consumption, exposure by supplier, risk score (criticality × lead time × dependency) |
 | 6 | `timeline` | How does the delay propagate? | Planned vs actual **Gantt** coloured by criticality, with team and incident on hover |
+| 7 | `schedule` | Are the standard times realistic? | Planned vs actual scatter with the line's **actual/planned ratio**, overrun histogram, overrun by start hour, end of day vs 17:00, suggested new standard times per step |
+| 8 | `cost-structure` | Where does the money go? | Parts vs planned labour vs labour overrun per step (log scale), supplier → part **treemap**, cost density €/kg, 80 % of the value concentrated on a few references |
+| 9 | `workforce` | Is the know-how at risk? | **Age pyramid** by level (experts aged 55+), certifications coverage, weekly **rotation heatmap** parsed from the ERP, stations without an expert ranked by overrun |
 
 ## 3. First findings on the sample data
 

@@ -1,5 +1,5 @@
-// Backend base URL; override with VITE_API_URL in frontend/.env.local.
-export const BACKEND_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+// Backend base URL; override with VITE_API_URL in frontend/.env.local (empty string = same origin).
+export const BACKEND_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:5000';
 
 /** Turns a backend path (e.g. /uploads/file.png) into an absolute URL. */
 export const getFileUrl = (path) => {

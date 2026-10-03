@@ -10,7 +10,15 @@ It shows station and step reports, nine cross analyses, and a chatbot (Gemini) t
 
 Built with a **Flask + pandas + Plotly** backend and a **React + Vite** frontend.
 
-![Dashboard demo: file preview, costs by step, cross analyses and Sankey workflow](docs/demo.gif)
+![Dashboard demo: home page, 360° overview, cost structure, workforce and Sankey workflow](docs/demo.gif)
+
+| Home | 360° overview |
+|---|---|
+| ![Home page](docs/screenshots/home.png) | ![360° overview](docs/screenshots/overview.png) |
+| **Cost structure** | **Workforce & succession** |
+| ![Cost structure](docs/screenshots/cost.png) | ![Workforce & succession](docs/screenshots/workforce.png) |
+
+![Sankey workflow](docs/screenshots/sankey.png)
 
 ## Quick start
 

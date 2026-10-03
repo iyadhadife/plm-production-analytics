@@ -10,6 +10,8 @@ It shows station and step reports, six cross analyses, and a chatbot (Gemini) th
 
 Built with a **Flask + pandas + Plotly** backend and a **React + Vite** frontend.
 
+![Dashboard demo: file preview, costs by step, cross analyses and Sankey workflow](docs/demo.gif)
+
 ## Quick start
 
 ### 1. Backend (Python 3.10+)
